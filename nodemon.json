@@ -1,0 +1,9 @@
+
+{
+  "verbose": true,
+  "ignore": ["gamemodes/mymode.amx"],
+  "execMap": {
+    "pwn": "compile.bat",
+    "inc": "compile.bat"
+  }
+}

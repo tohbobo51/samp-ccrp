@@ -1,0 +1,47 @@
+name: Compile Pawn Gamemode (AMX Builder)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install 32-bit execution dependencies
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt-get update
+          sudo apt-get install -y libc6:i386 libstdc++6:i386 libgcc-s1:i386
+
+      - name: Set permissions
+        run: |
+          chmod +x ./pawno/pawncc
+          chmod +x ./samp03svr
+          chmod +x ./announce
+
+      - name: Compile Gamemode (mymode.pwn -> mymode.amx)
+        run: |
+          ./pawno/pawncc -Dgamemodes mymode.pwn -\;+ -\(+ -d3 -Z+
+          ls -la gamemodes/mymode.amx
+
+      - name: Upload AMX Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: compiled-gamemode-amx
+          path: gamemodes/mymode.amx
+
+      - name: Commit AMX back to repository
+        if: github.event_name == 'push'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f gamemodes/mymode.amx
+          git diff --staged --quiet || (git commit -m "Auto-compile mymode.amx [skip ci]" && git push)

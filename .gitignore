@@ -1,0 +1,10 @@
+server_log.txt
+server.cfg
+control.log
+.env
+logs/**/*.log
+**/*.amx
+mysql_log.txt
+crashinfo.txt
+svlog.txt
+fcnpc-crash_*.txt

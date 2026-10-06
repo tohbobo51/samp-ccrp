@@ -1,0 +1,20 @@
+echo Executing Server Config...
+lanmode 0
+rcon_password qweqew
+maxplayers 50
+port 8888
+hostname Capitol City Roleplay [ECOSIM]
+gamemode0 mymode
+filterscripts
+plugins pawnraknet.so sampvoice.so KeyListener.so mysql.so sscanf.so crashdetect.so PawnPlus.so pawncmd.so streamer.so cef.so redis.so requests.so chandlingsvr.so FCNPC.so timerfix.so mapandreas.so ColAndreas.so YSF.so GPS.so env.so nativechecker.so
+announce 0
+chatlogging 0
+weburl www.ccrp.world
+onfoot_rate 40
+incar_rate 40
+weapon_rate 33
+stream_distance 300.0
+stream_rate 1000
+maxnpc 25
+logtimeformat [%H:%M:%S]
+language EN|ID

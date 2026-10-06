@@ -1,0 +1,2 @@
+#define GPS:: gps_
+
